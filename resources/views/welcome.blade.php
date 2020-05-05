@@ -29,9 +29,6 @@
                                         @if(Auth::user()->hasRole('admin'))
                                             <a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Edit</a>
                                         @endif
-{{--                                        @if($property->user_id == $user)--}}
-{{--                                            <a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Edit</a>--}}
-{{--                                        @endif--}}
                                     @endif
                                 </div>
 
