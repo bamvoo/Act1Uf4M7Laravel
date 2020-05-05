@@ -18,23 +18,21 @@
                         <div class="grid_c">
 
                                 <div style="height: 360px;">
-                                    <img src="{{asset('storage/'.$property->fotografia)}}" width="150px">
+                                    <img src="{{asset('storage/'.$property->fotografia)}}" width="150px" height="150px" style=" margin-bottom:20px;">
                                     <h5>{{$property->direccion}}</h5>
-                                    <h5>{{$property->precio}}</h5>
+                                    <h5>{{$property->precio}} €</h5>
                                     <h5>{{$property->tipo}}</h5>
                                     <h5>{{$property->estado}}</h5>
                                     <h5>{{$property->m2}} m2</h5>
-                                    @guest
-
-                                        @if(Auth::user())
-                                            @if(Auth::user()->hasRole("admin"))
-                                                <a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Edit</a>
-                                            @endif
-                                        @else
-                                            <a class="btn btn-primary" href="{{ route('properties.show', $property->id)}}">Ver</a>
+                                    @if(Auth::user())
+                                        <a class="btn btn-primary" href="{{ route('properties.show', $property->id)}}">Ver</a>
+                                        @if(Auth::user()->hasRole('admin'))
+                                            <a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Edit</a>
                                         @endif
-                                    @endguest
-
+{{--                                        @if($property->user_id == $user)--}}
+{{--                                            <a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Edit</a>--}}
+{{--                                        @endif--}}
+                                    @endif
                                 </div>
 
                         </div>

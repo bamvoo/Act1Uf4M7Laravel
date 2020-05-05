@@ -5,40 +5,47 @@
 
         <h1 class="my-4">Mis Propiedades</h1>
         <table class="table">
-
-{{--            añadir que solo se pongas sus propiedades--}}
+            <thead>
+            <tr>
+                <th scope="col">Imagen</th>
+                <th scope="col">Dirección</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Tipo de hogar</th>
+                <th scope="col">Tipo contrato</th>
+                <th scope="col">Metros cuadrados</th>
+                <th scope="col">Opciones</th>
+            </tr>
+            </thead>
+            <tbody>
             @foreach($properties as $property)
-                    <div>
-                        <a href="{{ route('properties.show', $property->id)}}">
-{{--                            <a>{{$property->fotografia}}</a>--}}
-                            <img src="{{asset('storage/'.$property->fotografia)}}" width="150px">
-                            <h5>{{$property->direccion}}</h5>
-                            <h5>{{$property->precio}}</h5>
-                            <h5>{{$property->tipo}}</h5>
-                            <h5>{{$property->estado}}</h5>
-                            <h5>{{$property->m2}} metros cuadrados</h5>
+                @if($property->user_id == $user)
+                <div>
+                    <tr>
+                        <td><img src="{{asset('storage/'.$property->fotografia)}}" width="150px"></td>
+                        <td><h5>{{$property->direccion}}</h5></td>
+                        <td><h5>{{$property->precio}}</h5></td>
+                        <td><h5>{{$property->tipo}}</h5></td>
+                        <td><h5>{{$property->estado}}</h5></td>
+                        <td><h5>{{$property->m2}}</h5></td>
+                        <td>
                             <a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Editar</a>
-{{--                            <a class="btn btn-primary" href="{{route('properties.destroy',$property->id)}}">Destruir</a>--}}
+                            {{--                            <a class="btn btn-primary" href="{{route('properties.destroy',$property->id)}}">Destruir</a>--}}
                             <form action="{{ route('properties.destroy', $property->id) }}" method='POST' >
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="btn btn-primary">Eliminar</button>
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
 
                             </form>
-                        </a>
-                    </div>
-
+                            <a class="btn btn-primary" href="{{ route('properties.show', $property->id)}}">Ver</a>
+                        </td>
+                    </tr>
+                </div>
+                @endif
             @endforeach
-            <a href="{{ route('properties.create') }}">TEXTO AQUI</a>
+            </tbody>
         </table>
+        <a href="{{ route('properties.create') }}"><div class="btn btn-secondary btn-block ">Crear propiedad</div></a>
     </div>
 
 @endsection
 
-{{--                <tr>--}}
-{{--                    <td>{{$property->descripcion}}</td>--}}
-{{--                    <td>{{$property->precio}} €</td>--}}
-{{--                    <td>{{$property->tipo}}</td>--}}
-{{--                    <td>{{$property->fotografia}}</td>--}}
-{{--                    <td><a class="btn btn-primary" href="{{route('properties.edit',$property->id)}}">Edit</a></td>--}}
-{{--                </tr>--}}

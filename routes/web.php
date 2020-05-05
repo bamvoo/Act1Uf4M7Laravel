@@ -31,22 +31,28 @@ Route::get('/salir', function () {
     return redirect('home');
 });
 */
+
+
 Route::get('/salir', function () {
     return redirect()->route('welcome');
 });
 
 Auth::routes();
 
+//Nos lleva a welcome
 Route::get('/', 'HomeController@index')->name('/');
 /*Route::match(['get','post'],function (){};*/
 
+//middleware para auntentificar admins
 Route::put('post/{id}', function ($id) {
 
 })->middleware('auth', 'role:admin');
 
+//ruta página propiedades
 Route::resource(
     'properties', 'PropertyController'
 );
+//ruta página usuarios
 Route::resource(
     'adminPower', 'UsersController'
 );

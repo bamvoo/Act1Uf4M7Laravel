@@ -21,8 +21,9 @@ class PropertyController extends Controller
      */
     public function index()
     {
+        $user = auth()->user()->id;
         $properties= Property::all();
-        return view('properties.index',compact('properties'));
+        return view('properties.index',compact('properties', 'user'));
     }
 
     /**
